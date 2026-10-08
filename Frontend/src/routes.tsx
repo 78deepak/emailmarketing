@@ -16,6 +16,10 @@ import ListsPage from '@/app/lists/lists.page';
 import ListDetailPage from '@/app/lists/list-detail.page';
 import TagsPage from '@/app/tags/tags.page';
 import SegmentsPage from '@/app/segments/segments.page';
+import TemplatesPage from '@/app/templates/templates.page';
+import TemplateEditorPage from '@/app/templates/template-editor.page';
+import SignaturesPage from '@/app/sending/signatures.page';
+import DomainsPage from '@/app/sending/domains.page';
 import AdminDashboardPage from '@/admin/dashboard.page';
 
 import {
@@ -70,6 +74,11 @@ const router = createBrowserRouter([
       { path: 'lists/:id', element: <ListDetailPage /> },
       { path: 'tags', element: <TagsPage /> },
       { path: 'segments', element: <SegmentsPage /> },
+      { path: 'templates', element: <TemplatesPage /> },
+      { path: 'templates/new', element: <TemplateEditorPage /> },
+      { path: 'templates/:id/edit', element: <TemplateEditorPage /> },
+      { path: 'sending/signatures', element: <SignaturesPage /> },
+      { path: 'sending/domains', element: <DomainsPage /> },
       { path: 'sending/blacklist', element: <TagsPage /> },
     ],
   },
