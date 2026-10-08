@@ -85,3 +85,42 @@ export function useDeleteContact() {
     },
   });
 }
+
+export function useImportContacts() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (payload: { contacts: Array<{ email: string; firstName?: string; lastName?: string; attributes?: Record<string, unknown> }>; listId?: string }) =>
+      apiCall<{ imported: number; skipped: number; errors: Array<{ email: string; reason: string }> }>(() =>
+        api.post('/contacts/import', payload),
+      ),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['contacts'] });
+      qc.invalidateQueries({ queryKey: ['lists'] });
+    },
+  });
+}
+
+export function useAddTagToContact() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ contactId, tagId }: { contactId: string; tagId: string }) =>
+      apiCall<{ message: string }>(() => api.post(`/contacts/${contactId}/tags`, { tagId })),
+    onSuccess: (_data, variables) => {
+      qc.invalidateQueries({ queryKey: ['contacts', 'detail', variables.contactId] });
+      qc.invalidateQueries({ queryKey: ['contacts', 'list'] });
+    },
+  });
+}
+
+export function useRemoveTagFromContact() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ contactId, tagId }: { contactId: string; tagId: string }) =>
+      apiCall<{ message: string }>(() => api.delete(`/contacts/${contactId}/tags/${tagId}`)),
+    onSuccess: (_data, variables) => {
+      qc.invalidateQueries({ queryKey: ['contacts', 'detail', variables.contactId] });
+      qc.invalidateQueries({ queryKey: ['contacts', 'list'] });
+    },
+  });
+}
+

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Email Marketing SaaS - Frontend Review & Roadmap</title>
+<style>
+  @page {
+    size: A4;
+    margin: 18mm 16mm 18mm 16mm;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #1e293b;
+    line-height: 1.5;
+    font-size: 13px;
+    margin: 0;
+    padding: 0;
+  }
+  .header {
+    border-bottom: 2px solid #0d9488;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+  }
+  .header h1 {
+    font-size: 24px;
+    color: #0f172a;
+    margin: 0 0 4px 0;
+    font-weight: 800;
+  }
+  .header .subtitle {
+    font-size: 14px;
+    color: #0d9488;
+    font-weight: 600;
+    margin: 0 0 10px 0;
+  }
+  .meta-box {
+    display: flex;
+    justify-content: space-between;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-size: 11.5px;
+    color: #475569;
+  }
+  .meta-box strong {
+    color: #1e293b;
+  }
+  h2 {
+    font-size: 16px;
+    color: #0f172a;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 6px;
+    margin-top: 24px;
+    margin-bottom: 12px;
+    page-break-after: avoid;
+  }
+  h3 {
+    font-size: 13.5px;
+    color: #0d9488;
+    margin-top: 14px;
+    margin-bottom: 4px;
+    page-break-after: avoid;
+  }
+  p {
+    margin: 0 0 10px 0;
+  }
+  .callout {
+    background: #f0fdf4;
+    border-left: 4px solid #16a34a;
+    padding: 10px 14px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    font-size: 12px;
+    color: #166534;
+  }
+  .callout strong {
+    color: #14532d;
+    font-size: 12.5px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 18px;
+    font-size: 11.5px;
+    page-break-inside: auto;
+  }
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+  th, td {
+    border: 1px solid #cbd5e1;
+    padding: 7px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background-color: #0f172a;
+    color: #ffffff;
+    font-weight: 600;
+  }
+  .badge-done {
+    display: inline-block;
+    background: #dcfce7;
+    color: #15803d;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 10.5px;
+  }
+  .badge-pending {
+    display: inline-block;
+    background: #fef3c7;
+    color: #b45309;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 10.5px;
+  }
+  .endpoint {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 10.5px;
+    color: #0369a1;
+    background: #f0f9ff;
+    padding: 1px 4px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 3px;
+  }
+  ul {
+    margin: 4px 0 12px 18px;
+    padding: 0;
+  }
+  li {
+    margin-bottom: 3px;
+  }
+  .phase-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid #0d9488;
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    page-break-inside: avoid;
+  }
+  .phase-title {
+    font-weight: 700;
+    font-size: 13px;
+    color: #0f172a;
+    display: flex;
+    justify-content: space-between;
+  }
+  .phase-reason {
+    font-size: 11.5px;
+    color: #64748b;
+    font-style: italic;
+    margin: 2px 0 6px 0;
+  }
+  .page-break {
+    page-break-before: always;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Email Marketing SaaS</h1>
+  <div class="subtitle">Frontend Review, Backend Alignment & Step-by-Step Implementation Roadmap</div>
+  <div class="meta-box">
+    <div><strong>Tech Stack:</strong> NestJS + PostgreSQL (Prisma/RLS) & BullMQ | React 19 + Vite + Tailwind</div>
+    <div><strong>Audit Date:</strong> October 2026 | <strong>Status:</strong> Architecture Verified</div>
+  </div>
+</div>
+
+<div class="callout">
+  <strong>Key Takeaway:</strong>
+  The backend is ~85-90% complete with 14 active modules, full quota gating, and email tracking pipelines. The frontend has completed 100% of its foundational shell (Authentication, Layouts, ⌘K command palette, and trial billing states), but business feature pages (Contacts, Templates, Campaigns, Automations, Forms, Sending, and Billing Upgrade) are currently pending UI views.
+</div>
+
+<h2>1. What is DONE in Frontend</h2>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Area</th>
+      <th style="width: 18%;">Status</th>
+      <th style="width: 57%;">Implementation Details & Key Files</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Auth Flow & Security</strong></td>
+      <td><span class="badge-done">100% Done</span></td>
+      <td>
+        • 5 full pages: Login, Signup, Forgot Password, Reset Password, Verify Email.<br>
+        • Persisted Zustand store (<code>auth.store.ts</code>) + automatic 14-day trial startup.<br>
+        • Axios client (<code>api.ts</code>) with <strong>single-flight 401 refresh token queue</strong> and error normalization.<br>
+        • Route protection guards (<code>RequireAuth</code>, <code>RequireGuest</code>, <code>RequirePlatformAdmin</code>).
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Layout & Shell</strong></td>
+      <td><span class="badge-done">100% Done</span></td>
+      <td>
+        • Acelle-style sidebar navigation (Campaigns, Audience, Sending) in <code>sidebar.tsx</code>.<br>
+        • Header with user profile menu, avatar initials, and fast logout.<br>
+        • Global Command Palette (<kbd>⌘K</kbd> / <kbd>Ctrl+K</kbd>) in <code>command-palette.tsx</code>.<br>
+        • Theme store & dark/light styling.
+      </td>
+    </tr>
+    <tr>
+      <td><strong>UI Component System</strong></td>
+      <td><span class="badge-done">100% Done</span></td>
+      <td>
+        • Radix UI + Tailwind primitives: Button, Dialog, Dropdown, Avatar, Badge, Checkbox, Select, Command, Input, Label, FormField.<br>
+        • Sonner toast notification system.
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Reactive Trial Banner</strong></td>
+      <td><span class="badge-done">100% Done</span></td>
+      <td>
+        • <code>trial-banner.tsx</code> & <code>banner-state.ts</code> automatically monitor subscription state.<br>
+        • Triggers urgent amber warnings when ≤3 days remain, red banners on expired/past-due.
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Customer Home Dashboard</strong></td>
+      <td><span class="badge-done">Skeleton Ready</span></td>
+      <td>
+        • <code>dashboard.page.tsx</code> with 3 Credit Meters (reading live subscription plan limits).<br>
+        • 4 7-Day Stat Cards (Total Sent, Open Rate, Click Rate, Bounce Rate) with layout verified.
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Contacts Data Layer</strong></td>
+      <td><span class="badge-done">Hooks Ready</span></td>
+      <td>
+        • TanStack Query hooks in <code>use-contacts.ts</code> (useContacts, useContact, useCreateContact, useUpdateContact, useDeleteContact).<br>
+        • <code>status-badge.tsx</code> mapping Prisma status enum to visual badges.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<h2>2. What is PENDING in Frontend (Backend Gap Analysis)</h2>
+<p>Each item below corresponds to a fully developed backend controller waiting for frontend UI views:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Module & Route</th>
+      <th style="width: 32%;">Backend Endpoints Available</th>
+      <th style="width: 43%;">Pending Frontend Views & Logic</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Audience: Contacts</strong><br><code>/app/contacts</code></td>
+      <td>
+        <span class="endpoint">POST /api/contacts</span><br>
+        <span class="endpoint">GET /api/contacts</span><br>
+        <span class="endpoint">POST /api/contacts/import</span><br>
+        <span class="endpoint">GET/PATCH/DELETE /api/contacts/:id</span><br>
+        <span class="endpoint">POST/DELETE :id/tags</span>
+      </td>
+      <td>
+        • Contacts DataTable with search, status filters, and pagination.<br>
+        • "Add Contact" modal dialog.<br>
+        • "Import CSV" drag-and-drop modal.<br>
+        • Contact details drawer & delete confirmation dialog.
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Audience: Lists & Tags</strong><br><code>/app/lists</code><br><code>/app/tags</code></td>
+      <td>
+        <span class="endpoint">GET/POST/PATCH/DELETE /api/lists</span><br>
+        <span class="endpoint">POST/DELETE :id/contacts</span><br>
+        <span class="endpoint">GET /api/lists/:id/contacts</span><br>
+        <span class="endpoint">GET/POST/DELETE /api/tags</span><br>
+        <span class="endpoint">GET/POST/DELETE /api/suppressions</span>
+      </td>
+      <td>
+        • Lists management grid with contact counts.<br>
+        • List detail view showing assigned contacts.<br>
+        • Tags management view.<br>
+        • Suppression / Blacklist management screen.
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Audience: Segments</strong><br><code>/app/segments</code></td>
+      <td>
+        <span class="endpoint">GET/POST/PATCH/DELETE /api/segments</span><br>
+        <span class="endpoint">GET /api/segments/:id/preview</span>
+      </td>
+      <td>
+        • Segments list screen.<br>
+        • Filter criteria builder (by tag, status, creation date).<br>
+        • Real-time audience size calculation preview.
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Templates & Signatures</strong><br><code>/app/templates</code><br><code>/app/sending/signatures</code></td>
+      <td>
+        <span class="endpoint">GET/POST/PATCH/DELETE /api/templates</span><br>
+        <span class="endpoint">POST :id/duplicate</span><br>
+        <span class="endpoint">GET/POST/PATCH/DELETE /api/signatures</span><br>
+        <span class="endpoint">POST :id/verify, :id/default</span><br>
+        <span class="endpoint">GET/POST /api/template-categories</span>
+      </td>
+      <td>
+        • Template gallery grid with category filtering & preview.<br>
+        • HTML email template editor.<br>
+        • Sender Signatures screen ("From Name" & "From Email") with "Verify" and "Set as Default" buttons.
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Campaigns & Delivery</strong><br><code>/app/campaigns</code></td>
+      <td>
+        <span class="endpoint">GET/POST/PATCH/DELETE /api/campaigns</span><br>
+        <span class="endpoint">POST :id/duplicate</span><br>
+        <span class="endpoint">POST :id/schedule</span><br>
+        <span class="endpoint">POST :id/pause, :id/resume, :id/cancel</span><br>
+        <span class="endpoint">POST :id/resolve-recipients</span>
+      </td>
+      <td>
+        • Campaigns list view with status indicators.<br>
+        • <strong>4-Step Creation Wizard:</strong><br>
+          &nbsp;&nbsp;1. Details (Subject, Preheader, Sender)<br>
+          &nbsp;&nbsp;2. Audience (List or Segment)<br>
+          &nbsp;&nbsp;3. Template selection<br>
+          &nbsp;&nbsp;4. Schedule / Send Now button.<br>
+        • Actions: Pause, Resume, Cancel, Duplicate.
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Campaign Analytics</strong><br><code>/app/campaigns/:id</code></td>
+      <td>
+        <span class="endpoint">GET /api/campaigns/:id/analytics</span><br>
+        <span class="endpoint">GET /api/campaigns/:id/analytics/timeline</span>
+      </td>
+      <td>
+        • Real-time delivery cards (Sent, Delivered, Opens, Clicks, Bounces).<br>
+        • Open and click rate metric indicators.<br>
+        • Hourly/daily activity timeline chart.
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Sending Infrastructure</strong><br><code>/app/sending/domains</code></td>
+      <td>
+        <span class="endpoint">GET/POST/DELETE /api/sending-domains</span><br>
+        <span class="endpoint">POST :id/verify</span>
+      </td>
+      <td>
+        • Sending domains list with DNS status.<br>
+        • Add Domain modal displaying SPF, DKIM, and DMARC records.<br>
+        • "Verify DNS" button calling verification endpoint.
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Automations (Drip)</strong><br><code>/app/automations</code></td>
+      <td>
+        <span class="endpoint">GET/POST/PATCH/DELETE /api/automations</span><br>
+        <span class="endpoint">PUT :id/steps</span><br>
+        <span class="endpoint">POST :id/activate, :id/pause, :id/enroll</span><br>
+        <span class="endpoint">GET :id/runs</span>
+      </td>
+      <td>
+        • Automation workflows list.<br>
+        • Step sequence editor (Trigger -> Wait -> Send Email -> Condition).<br>
+        • Workflow activation toggle & execution run log.
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Forms & Lead Capture</strong><br><code>/app/forms</code></td>
+      <td>
+        <span class="endpoint">GET/POST/PATCH/DELETE /api/forms</span><br>
+        <span class="endpoint">GET :id/submissions</span><br>
+        <span class="endpoint">POST /api/public/forms/:id/submissions</span>
+      </td>
+      <td>
+        • Forms list & form builder.<br>
+        • HTML embed code modal.<br>
+        • Form submissions log viewer.<br>
+        • Standalone public form submission page.
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Billing & Plans</strong><br><code>/app/billing</code></td>
+      <td>
+        <span class="endpoint">GET /api/plans</span><br>
+        <span class="endpoint">GET /api/billing/subscription</span><br>
+        <span class="endpoint">POST /api/billing/subscription/checkout</span><br>
+        <span class="endpoint">POST /api/billing/subscription/cancel</span>
+      </td>
+      <td>
+        • Current subscription details & quota meters.<br>
+        • Pricing comparison cards (Starter, Pro, Business).<br>
+        • "Upgrade" button opening Razorpay checkout script.<br>
+        • Subscription cancellation modal.
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Settings & Team</strong><br><code>/app/settings</code></td>
+      <td>
+        <span class="endpoint">GET/PATCH /api/users/me</span><br>
+        <span class="endpoint">PATCH /api/users/me/password</span><br>
+        <span class="endpoint">GET/PATCH /api/tenants/current</span><br>
+        <span class="endpoint">GET/POST/DELETE /api/users</span>
+      </td>
+      <td>
+        • User profile and password settings.<br>
+        • Workspace / Company name settings.<br>
+        • Team member invitation & roles table.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<h2>3. Step-by-Step Implementation Roadmap</h2>
+<p>Follow this chronological 6-phase sequence to build out the screens in logical dependency order:</p>
+
+<div class="phase-card">
+  <div class="phase-title">
+    <span>Phase 1: Audience & Contacts Management</span>
+    <span style="color: #0d9488;">START HERE</span>
+  </div>
+  <div class="phase-reason">Rationale: Without contacts and lists in your database, you cannot send campaigns or test automations.</div>
+  <ul>
+    <li>1. Build <strong>Contacts Table</strong> (<code>/app/contacts</code>) using TanStack Table with search, status filters, and pagination.</li>
+    <li>2. Build <strong>Add Contact Dialog</strong> wired to <code>useCreateContact()</code>.</li>
+    <li>3. Build <strong>Import CSV Dialog</strong> with drag-and-drop CSV upload calling <code>POST /api/contacts/import</code>.</li>
+    <li>4. Build <strong>Lists View</strong> (<code>/app/lists</code>) and list subscriber view.</li>
+    <li>5. Register routes in <code>routes.tsx</code> for <code>/app/contacts</code> and <code>/app/lists</code>.</li>
+  </ul>
+</div>
+
+<div class="phase-card">
+  <div class="phase-title">
+    <span>Phase 2: Templates & Sender Identities</span>
+    <span style="color: #64748b;">Step 2</span>
+  </div>
+  <div class="phase-reason">Rationale: Every campaign requires an email body template and a verified sender signature.</div>
+  <ul>
+    <li>1. Build <strong>Sender Signatures</strong> (<code>/app/sending/signatures</code>) to manage "From Name" and "From Email" with verify action.</li>
+    <li>2. Build <strong>Template Gallery</strong> (<code>/app/templates</code>) with thumbnail previews, categories, and duplicate action.</li>
+    <li>3. Build <strong>Template Editor</strong> (<code>/app/templates/:id/edit</code>) for HTML email content and subject lines.</li>
+    <li>4. Build <strong>Sending Domains</strong> (<code>/app/sending/domains</code>) with SPF/DKIM DNS verification instructions.</li>
+  </ul>
+</div>
+
+<div class="phase-card">
+  <div class="phase-title">
+    <span>Phase 3: Campaigns Flow & Analytics</span>
+    <span style="color: #64748b;">Step 3</span>
+  </div>
+  <div class="phase-reason">Rationale: This is the core revenue-generating product functionality of the platform.</div>
+  <ul>
+    <li>1. Build <strong>Campaigns List</strong> (<code>/app/campaigns</code>) with status badges and action menus (Pause, Resume, Cancel).</li>
+    <li>2. Build <strong>4-Step Creation Wizard</strong>: Campaign Info -> Select List/Segment -> Select Template -> Schedule/Send.</li>
+    <li>3. Connect schedule API (<code>POST :id/schedule</code>) and recipient resolution (<code>POST :id/resolve-recipients</code>).</li>
+    <li>4. Build <strong>Campaign Analytics Dashboard</strong> (<code>/app/campaigns/:id</code>) with open/click rates and delivery timeline chart.</li>
+  </ul>
+</div>
+
+<div class="phase-card">
+  <div class="phase-title">
+    <span>Phase 4: Billing & Upgrades</span>
+    <span style="color: #64748b;">Step 4</span>
+  </div>
+  <div class="phase-reason">Rationale: The trial banner points to /app/billing; users must be able to upgrade before trial ends.</div>
+  <ul>
+    <li>1. Build <strong>Billing View</strong> (<code>/app/billing</code>) showing current plan quota meters and trial countdown.</li>
+    <li>2. Render pricing tier cards from <code>GET /api/plans</code>.</li>
+    <li>3. Wire "Upgrade" button to <code>POST /api/billing/subscription/checkout</code> and load the Razorpay checkout modal.</li>
+    <li>4. Implement subscription cancellation confirmation dialog.</li>
+  </ul>
+</div>
+
+<div class="phase-card">
+  <div class="phase-title">
+    <span>Phase 5: Lead Forms & Automations</span>
+    <span style="color: #64748b;">Step 5</span>
+  </div>
+  <div class="phase-reason">Rationale: Drip automations and forms leverage your existing contacts, lists, and email templates.</div>
+  <ul>
+    <li>1. Build <strong>Forms Manager</strong> (<code>/app/forms</code>) with embed code generator and submissions table.</li>
+    <li>2. Build public form landing page (<code>/public/forms/:formId</code>).</li>
+    <li>3. Build <strong>Automations Workflows</strong> (<code>/app/automations</code>) with trigger and step sequence configuration.</li>
+    <li>4. Add workflow execution run logs.</li>
+  </ul>
+</div>
+
+<div class="phase-card">
+  <div class="phase-title">
+    <span>Phase 6: Workspace Settings, Team & Live Metrics</span>
+    <span style="color: #64748b;">Step 6</span>
+  </div>
+  <div class="phase-reason">Rationale: Completes multi-tenant collaboration and connects live database stats to the home dashboard.</div>
+  <ul>
+    <li>1. Build <strong>Profile & Password Settings</strong> (<code>/app/settings/profile</code>).</li>
+    <li>2. Build <strong>Team Management</strong> (<code>/app/settings/team</code>) for inviting team members and assigning roles.</li>
+    <li>3. Connect live counts into Home Dashboard Credit Meters (Lists, Campaigns, Subscribers).</li>
+    <li>4. Populate 7-day send volume and engagement rates.</li>
+  </ul>
+</div>
+
+<h2>4. Key Architectural Guidelines</h2>
+<ul>
+  <li><strong>Query Invalidation:</strong> Follow the convention in <code>use-contacts.ts</code>: root invalidate on create/delete, detail + list invalidate on update.</li>
+  <li><strong>Pagination Envelope:</strong> Backend returns <code>{ data: T[], meta: { page, limit, total, pages } }</code>. Remember the key is <code>pages</code>, not <code>totalPages</code>.</li>
+  <li><strong>Quota Gating Handling:</strong> Backend returns <code>403 QUOTA_EXCEEDED</code> when tenant exceeds limits. Show a clean "Upgrade Plan" modal rather than a generic error toast.</li>
+</ul>
+
+</body>
+</html>

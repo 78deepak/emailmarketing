@@ -7,6 +7,7 @@ import {
   Users,
   List,
   Tag,
+  Layers,
   Mail,
   Globe,
   ShieldAlert,
@@ -20,12 +21,6 @@ import { cn } from '@/lib/utils';
  * Sections mirror the Acelle screenshot: a HOME item, then CAMPAIGNS,
  * AUDIENCE, SENDING groups with lucide icons. Active state gets a green
  * background + green text (via our design tokens).
- *
- * Routes that don't have pages yet (Automation, Templates, Lists,
- * Contacts, Segments, Forms, Sending Domains, Blacklist, Signatures)
- * still get NavLinks — they route to /app/<slug> which currently 404s
- * back to /app via the catch-all. Chunks 6-9 replace those with real
- * pages one by one; no sidebar edit needed then.
  */
 
 interface NavItem {
@@ -57,6 +52,7 @@ const SECTIONS: NavSection[] = [
     items: [
       { label: 'Contacts', to: '/app/contacts', icon: Users },
       { label: 'Lists', to: '/app/lists', icon: List },
+      { label: 'Segments', to: '/app/segments', icon: Layers },
       { label: 'Tags', to: '/app/tags', icon: Tag },
       { label: 'Forms', to: '/app/forms', icon: PenLine },
     ],

@@ -11,6 +11,11 @@ import ResetPasswordPage from '@/auth/reset-password.page';
 import VerifyEmailPage from '@/auth/verify-email.page';
 
 import DashboardPage from '@/app/dashboard.page';
+import ContactsPage from '@/app/contacts/contacts.page';
+import ListsPage from '@/app/lists/lists.page';
+import ListDetailPage from '@/app/lists/list-detail.page';
+import TagsPage from '@/app/tags/tags.page';
+import SegmentsPage from '@/app/segments/segments.page';
 import AdminDashboardPage from '@/admin/dashboard.page';
 
 import {
@@ -20,19 +25,7 @@ import {
 } from '@/auth/guards';
 
 /**
- * Route tree — Chunk 4.
- *
- * Two auth sub-trees now:
- *
- *   /auth/*                      guest-only  (login, signup, forgot)
- *   /auth/reset-password         PUBLIC      (a user with a token
- *                                             might be logged in; they
- *                                             should still see the form)
- *   /auth/verify-email           PUBLIC      (same reasoning)
- *
- * The public two live OUTSIDE the RequireGuest wrapper so an already-
- * authenticated user clicking a reset link from their email actually
- * reaches the form instead of being bounced to /app.
+ * Route tree.
  */
 const router = createBrowserRouter([
   { path: '/', element: <Navigate to="/app" replace /> },
@@ -72,6 +65,12 @@ const router = createBrowserRouter([
     ),
     children: [
       { index: true, element: <DashboardPage /> },
+      { path: 'contacts', element: <ContactsPage /> },
+      { path: 'lists', element: <ListsPage /> },
+      { path: 'lists/:id', element: <ListDetailPage /> },
+      { path: 'tags', element: <TagsPage /> },
+      { path: 'segments', element: <SegmentsPage /> },
+      { path: 'sending/blacklist', element: <TagsPage /> },
     ],
   },
 

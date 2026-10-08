@@ -119,14 +119,23 @@ api.interceptors.response.use(
 );
 
 /**
- * Convenience: unwrap the ApiEnvelope for callers. Every non-@RawResponse
- * endpoint returns `{ success: true, data: T }` — this pulls the `.data`.
+ * Convenience: unwrap the ApiEnvelope for callers.
+ * Standard endpoints return `{ success: true, data: T }` -> returns `res.data.data`.
+ * Paginated endpoints return `{ success: true, data: T[], meta: { ... } }` ->
+ * returns `{ data: res.data.data, meta: res.data.meta }`.
  */
 export async function apiCall<T>(
-  fn: () => Promise<{ data: { data: T } }>,
+  fn: () => Promise<{ data: any }>,
 ): Promise<T> {
   const res = await fn();
-  return res.data.data;
+  const body = res.data;
+  if (body && typeof body === 'object' && 'meta' in body && body.meta !== undefined) {
+    return {
+      data: body.data,
+      meta: body.meta,
+    } as unknown as T;
+  }
+  return body?.data !== undefined ? body.data : body;
 }
 
 /**

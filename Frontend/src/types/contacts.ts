@@ -61,6 +61,24 @@ export interface UpdateContactPayload {
   status?: ContactStatus;
 }
 
+export interface ImportContactItem {
+  email: string;
+  firstName?: string;
+  lastName?: string;
+  attributes?: Record<string, unknown>;
+}
+
+export interface ImportContactsPayload {
+  contacts: ImportContactItem[];
+  listId?: string;
+}
+
+export interface ImportContactsResponse {
+  imported: number;
+  skipped: number;
+  errors: Array<{ email: string; reason: string }>;
+}
+
 // Standard paginated envelope from backend's `paginated()` helper
 // (server/src/common/dto/pagination.dto.ts). Envelope shape:
 // { success: true, data: { data, meta } }. Since apiCall() already
