@@ -18,6 +18,11 @@ import TagsPage from '@/app/tags/tags.page';
 import SegmentsPage from '@/app/segments/segments.page';
 import TemplatesPage from '@/app/templates/templates.page';
 import TemplateEditorPage from '@/app/templates/template-editor.page';
+import CampaignsPage from '@/app/campaigns/campaigns.page';
+import CampaignFormPage from '@/app/campaigns/campaign-form.page';
+import CampaignDetailPage from '@/app/campaigns/campaign-detail.page';
+import AutomationsPage from '@/app/automations/automations.page';
+import AutomationBuilderPage from '@/app/automations/automation-builder.page';
 import SignaturesPage from '@/app/sending/signatures.page';
 import DomainsPage from '@/app/sending/domains.page';
 import AdminDashboardPage from '@/admin/dashboard.page';
@@ -74,6 +79,12 @@ const router = createBrowserRouter([
       { path: 'lists/:id', element: <ListDetailPage /> },
       { path: 'tags', element: <TagsPage /> },
       { path: 'segments', element: <SegmentsPage /> },
+      { path: 'campaigns', element: <CampaignsPage /> },
+      { path: 'campaigns/new', element: <CampaignFormPage /> },
+      { path: 'campaigns/:id', element: <CampaignDetailPage /> },
+      { path: 'campaigns/:id/edit', element: <CampaignFormPage /> },
+      { path: 'automations', element: <AutomationsPage /> },
+      { path: 'automations/:id', element: <AutomationBuilderPage /> },
       { path: 'templates', element: <TemplatesPage /> },
       { path: 'templates/new', element: <TemplateEditorPage /> },
       { path: 'templates/:id/edit', element: <TemplateEditorPage /> },
