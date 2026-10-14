@@ -25,6 +25,11 @@ import AutomationsPage from '@/app/automations/automations.page';
 import AutomationBuilderPage from '@/app/automations/automation-builder.page';
 import SignaturesPage from '@/app/sending/signatures.page';
 import DomainsPage from '@/app/sending/domains.page';
+import FormsPage from '@/app/forms/forms.page';
+import FormBuilderPage from '@/app/forms/form-builder.page';
+import FormDetailPage from '@/app/forms/form-detail.page';
+import PublicFormPage from '@/app/forms/public-form.page';
+import UnsubscribePage from '@/app/sending/unsubscribe.page';
 import AdminDashboardPage from '@/admin/dashboard.page';
 
 import {
@@ -88,11 +93,19 @@ const router = createBrowserRouter([
       { path: 'templates', element: <TemplatesPage /> },
       { path: 'templates/new', element: <TemplateEditorPage /> },
       { path: 'templates/:id/edit', element: <TemplateEditorPage /> },
+      { path: 'forms', element: <FormsPage /> },
+      { path: 'forms/new', element: <FormBuilderPage /> },
+      { path: 'forms/:id', element: <FormDetailPage /> },
+      { path: 'forms/:id/edit', element: <FormBuilderPage /> },
       { path: 'sending/signatures', element: <SignaturesPage /> },
       { path: 'sending/domains', element: <DomainsPage /> },
       { path: 'sending/blacklist', element: <TagsPage /> },
     ],
   },
+
+  // Public Hosted Form & Unsubscribe Landing
+  { path: '/forms/:id', element: <PublicFormPage /> },
+  { path: '/unsubscribe/:token', element: <UnsubscribePage /> },
 
   {
     path: '/admin',
