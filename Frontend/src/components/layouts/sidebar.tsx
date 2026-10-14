@@ -12,6 +12,8 @@ import {
   Globe,
   ShieldAlert,
   PenLine,
+  CreditCard,
+  Settings,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -63,6 +65,13 @@ const SECTIONS: NavSection[] = [
       { label: 'Sending Domains', to: '/app/sending/domains', icon: Globe },
       { label: 'Signatures', to: '/app/sending/signatures', icon: Mail },
       { label: 'Blacklist', to: '/app/sending/blacklist', icon: ShieldAlert },
+    ],
+  },
+  {
+    heading: 'Workspace',
+    items: [
+      { label: 'Billing & Plans', to: '/app/billing', icon: CreditCard },
+      { label: 'Settings', to: '/app/settings', icon: Settings },
     ],
   },
 ];

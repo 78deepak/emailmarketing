@@ -92,41 +92,9 @@ export interface VerifyEmailPayload {
 }
 
 // ---- Subscription (Billing 16A) ----
-// Used by the trial banner + subscription screen.
-
-export type SubscriptionStatus =
-  | 'trialing'
-  | 'active'
-  | 'past_due'
-  | 'cancelled'
-  | 'unpaid'
-  | 'ended'
-  | 'pending';
-
-export interface Subscription {
-  id: string;
-  status: SubscriptionStatus;
-  planId: string;
-  currentPeriodStart: string | null; // ISO date
-  currentPeriodEnd: string | null;
-  cancelAtPeriodEnd: boolean;
-  plan?: {
-    id: string;
-    name: string;
-    code: string;
-    priceCents: number;
-    planLimit?: PlanLimit | null;
-  };
-}
-
-export interface PlanLimit {
-  maxContacts: number | null;
-  maxLists: number | null;
-  maxEmailsMonth: number | null;
-  maxEmailsDay: number | null;
-  maxUsers: number | null;
-  maxCampaigns: number | null;
-  maxAutomations: number | null;
-  dedicatedIp: boolean;
-  aiEnabled: boolean;
-}
+export type {
+  SubscriptionStatus,
+  Subscription,
+  PlanLimit,
+  Plan,
+} from '@/types/billing';

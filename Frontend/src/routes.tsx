@@ -30,6 +30,9 @@ import FormBuilderPage from '@/app/forms/form-builder.page';
 import FormDetailPage from '@/app/forms/form-detail.page';
 import PublicFormPage from '@/app/forms/public-form.page';
 import UnsubscribePage from '@/app/sending/unsubscribe.page';
+import BillingPage from '@/app/billing/billing.page';
+import SettingsPage from '@/app/settings/settings.page';
+import ProfilePage from '@/app/settings/profile.page';
 import AdminDashboardPage from '@/admin/dashboard.page';
 
 import {
@@ -100,6 +103,9 @@ const router = createBrowserRouter([
       { path: 'sending/signatures', element: <SignaturesPage /> },
       { path: 'sending/domains', element: <DomainsPage /> },
       { path: 'sending/blacklist', element: <TagsPage /> },
+      { path: 'billing', element: <BillingPage /> },
+      { path: 'settings', element: <SettingsPage /> },
+      { path: 'settings/profile', element: <ProfilePage /> },
     ],
   },
 
