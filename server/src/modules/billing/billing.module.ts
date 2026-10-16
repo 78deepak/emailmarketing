@@ -29,6 +29,8 @@ import { PlanGatingGuard } from './guards/plan-gating.guard';
  *   - BillingUsageService â for EmailProcessor to call recordEmailSent()
  *   - PlansService â reserved for platform-admin cross-imports (Step 20)
  */
+import { PlatformAdminGuard } from '../platform-admin/guards/platform-admin.guard';
+
 @Module({
   controllers: [
     PlansController,
@@ -43,6 +45,7 @@ import { PlanGatingGuard } from './guards/plan-gating.guard';
     BillingWebhookService,
     BillingUsageService,
     TrialWatchdogService,
+    PlatformAdminGuard,
     // Global gating â every route that has @CheckQuota / @RequiresFeature
     // gets enforced automatically.
     { provide: APP_GUARD, useClass: PlanGatingGuard },

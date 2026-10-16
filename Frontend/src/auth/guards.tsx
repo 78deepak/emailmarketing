@@ -62,12 +62,8 @@ export function RequirePlatformAdmin({ children }: Props) {
     return <HydratingFallback />;
   }
 
-  if (!isAuthenticated()) {
-    return <Navigate to="/auth/login" replace />;
-  }
-
-  if (!user?.isPlatformAdmin) {
-    return <Navigate to="/app" replace />;
+  if (!isAuthenticated() || !user?.isPlatformAdmin) {
+    return <Navigate to="/admin/login" replace />;
   }
 
   return <>{children}</>;

@@ -74,6 +74,7 @@ import { TrackingModule } from './modules/tracking/tracking.module';
 import { AutomationsModule } from './modules/automations/automations.module';
 import { FormsModule } from './modules/forms/forms.module';
 import { BillingModule } from './modules/billing/billing.module';
+import { PlatformAdminModule } from './modules/platform-admin/platform-admin.module';
 
 @Module({
   imports: [
@@ -110,6 +111,7 @@ import { BillingModule } from './modules/billing/billing.module';
     AutomationsModule,
     FormsModule,
     BillingModule,
+    PlatformAdminModule,
   ],
   controllers: [AppController],
   providers: [AppService, { provide: APP_GUARD, useClass: JwtAuthGuard }],

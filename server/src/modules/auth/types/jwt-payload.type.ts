@@ -1,5 +1,6 @@
 export interface JwtPayload {
-  sub: string; // user id
-  tenantId: string;
+  sub: string; // user id or admin id
+  tenantId?: string;
   email: string;
+  isPlatformAdmin?: boolean;
 }

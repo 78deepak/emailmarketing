@@ -35,7 +35,9 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     const request = context.switchToHttp().getRequest();
     request.user = user;
     request.tenantId = user.tenantId;
-    this.cls.set('tenantId', user.tenantId);
+    if (user.tenantId) {
+      this.cls.set('tenantId', user.tenantId);
+    }
     return user;
   }
 }

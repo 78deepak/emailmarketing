@@ -34,6 +34,10 @@ import BillingPage from '@/app/billing/billing.page';
 import SettingsPage from '@/app/settings/settings.page';
 import ProfilePage from '@/app/settings/profile.page';
 import AdminDashboardPage from '@/admin/dashboard.page';
+import AdminLoginPage from '@/admin/admin-login.page';
+import CustomersPage from '@/admin/customers.page';
+import PlansPage from '@/admin/plans.page';
+import PlatformSettingsPage from '@/admin/settings.page';
 
 import {
   RequireAuth,
@@ -113,6 +117,8 @@ const router = createBrowserRouter([
   { path: '/forms/:id', element: <PublicFormPage /> },
   { path: '/unsubscribe/:token', element: <UnsubscribePage /> },
 
+  // Platform Super-Admin Routes
+  { path: '/admin/login', element: <AdminLoginPage /> },
   {
     path: '/admin',
     element: (
@@ -122,6 +128,9 @@ const router = createBrowserRouter([
     ),
     children: [
       { index: true, element: <AdminDashboardPage /> },
+      { path: 'customers', element: <CustomersPage /> },
+      { path: 'plans', element: <PlansPage /> },
+      { path: 'settings', element: <PlatformSettingsPage /> },
     ],
   },
 

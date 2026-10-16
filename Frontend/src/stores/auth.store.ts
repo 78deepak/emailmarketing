@@ -34,6 +34,7 @@ interface AuthState {
 
   // Actions
   login: (payload: LoginPayload) => Promise<void>;
+  adminLogin: (payload: LoginPayload) => Promise<void>;
   signup: (payload: SignupPayload) => Promise<void>;
   logout: () => void;
 
@@ -57,6 +58,30 @@ export const useAuthStore = create<AuthState>()(
         );
         set({
           user: data.user,
+          tokens: { accessToken: data.accessToken, refreshToken: data.refreshToken },
+        });
+      },
+
+      adminLogin: async (payload) => {
+        const data = await apiCall<{
+          admin: {
+            id: string;
+            email: string;
+            firstName?: string;
+            lastName?: string;
+            isSuper: boolean;
+          };
+          accessToken: string;
+          refreshToken: string;
+        }>(() => api.post('/admin/auth/login', payload));
+        set({
+          user: {
+            id: data.admin.id,
+            email: data.admin.email,
+            firstName: data.admin.firstName,
+            lastName: data.admin.lastName,
+            isPlatformAdmin: true,
+          },
           tokens: { accessToken: data.accessToken, refreshToken: data.refreshToken },
         });
       },

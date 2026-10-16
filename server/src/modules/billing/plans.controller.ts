@@ -38,10 +38,13 @@ export class PlansController {
   }
 }
 
+import { UseGuards } from '@nestjs/common';
+import { PlatformAdminGuard } from '../platform-admin/guards/platform-admin.guard';
+
 /**
- * Admin plan management. See note above about auth â this is a temporary
- * home until Platform Admin (Step 20).
+ * Admin plan management. Protected by PlatformAdminGuard.
  */
+@UseGuards(PlatformAdminGuard)
 @Controller('admin/plans')
 export class AdminPlansController {
   constructor(private readonly plans: PlansService) {}
